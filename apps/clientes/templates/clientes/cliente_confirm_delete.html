@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Excluir cliente{% endblock title %}
+
+{% block content %}
+
+    <h1>Confirmar</h1>
+
+    <p>Tem certeza que deseja excluir este cliente?</p>
+    <p><small>Os orçamentos serão perdidos</small></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+    </form>
+
+{% endblock content %}

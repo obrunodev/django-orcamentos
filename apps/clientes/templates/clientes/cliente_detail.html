@@ -1,0 +1,18 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Detalhes do cliente{% endblock title %}
+
+{% block content %}
+
+    <h1>Dados do cliente</h1>
+
+    <a href="{% url "clientes:list" %}">Voltar</a>
+
+    <ul>
+        <li>Nome: {{ cliente.nome }}</li>
+        <li>Telefone: {{ cliente.telefone }}</li>
+        <li>E-mail: {{ cliente.email|default:"Não fornecido" }}</li>
+        <li>Endereço: {{ cliente.endereco|default:"Não fornecido" }}</li>
+    </ul>
+
+{% endblock content %}
