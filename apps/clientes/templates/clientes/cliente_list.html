@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Clientes{% endblock title %}
+
+{% block content %}
+
+    <h1>Clientes</h1>
+
+    <a href="{% url "clientes:create" %}">Novo cliente</a>
+
+    <ul>
+        {% for cliente in clientes %}
+            <li>
+                {{ cliente.nome }}
+                <a href="{% url "clientes:update" cliente.id %}">Editar</a>
+                <a href="{% url "clientes:detail" cliente.id %}">Visualizar</a>
+                <a href="{% url "clientes:delete" cliente.id %}">Excluir</a>
+            </li>
+        {% empty %}
+            {% if request.GET.q %}
+                <li>Nenhum cliente encontrado.</li>
+            {% else %}
+                <li>Nenhum cliente cadastrado.</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
