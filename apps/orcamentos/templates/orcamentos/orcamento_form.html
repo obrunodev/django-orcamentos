@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Novo orçamento{% endblock title %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">
+            {% if orcamento.id %}Editar{% else %}Novo{% endif %}
+            Orçamento
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-2">
+                    {% if orcamento.id %}
+                        Atualizar
+                    {% else %}
+                        Cadastrar
+                    {% endif %}
+                </button>
+                <a href="{% url "clientes:list" %}" class="btn btn-secondary mt-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

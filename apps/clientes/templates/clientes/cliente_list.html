@@ -29,6 +29,11 @@
                                     <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-28px, 30.4px, 0px);" data-popper-reference-hidden="" data-popper-escaped="">
                                         <ul>
                                             <li>
+                                                <a class="dropdown-item" href="{% url "orcamentos:novo_orcamento" cliente.id %}">
+                                                    <i class="far fa-eye me-2"></i>Criar orçamento
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <a class="dropdown-item" href="{% url "clientes:detail" cliente.id %}">
                                                     <i class="far fa-eye me-2"></i>Visualizar
                                                 </a>
