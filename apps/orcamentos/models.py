@@ -10,6 +10,7 @@ class Orcamento(BaseModel):
         AGUARDANDO_CLIENTE = 'aguardando_cliente', 'Aguardando cliente'
         APROVADO = 'aprovado', 'Aprovado'
         RECUSADO = 'recusado', 'Recusado'
+        CANCELADO = 'cancelado', 'Cancelado'
 
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)

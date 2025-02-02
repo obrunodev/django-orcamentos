@@ -1,0 +1,24 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Cancelar orçamento{% endblock title %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">
+            Confirmar cancelamento
+        </div>
+        <div class="card-body">
+            <p>Tem certeza que deseja cancelar esse orçamento?</p>
+            <p><small>Obs.: Ele continuará salvo, porém não poderá mais ser alterado.</small></p>
+        </div>
+        <div class="card-footer d-flex">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-2">Confirmar</button>
+            </form>
+            <a href="{% url "orcamentos:list" %}" class="btn btn-secondary mt-2 ms-3">Cancelar</a>
+        </div>
+    </div>
+
+{% endblock content %}

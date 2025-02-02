@@ -1,0 +1,76 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Lista de orçamentos{% endblock title %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex mb-3">
+                <form method="get">
+                    <input
+                        type="text"
+                        name="q"
+                        class="form-control"
+                        placeholder="Busque por usuário ou cliente"
+                        value="{{ request.GET.q }}">
+                </form>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Cliente</th>
+                        <th>Valor todal</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orcamento in orcamentos %}
+                        <tr>
+                            <td>{{ orcamento.usuario.get_full_name|default:orcamento.usuario.email }}</td>
+                            <td>{{ orcamento.cliente }}</td>
+                            <td>R$ {{ orcamento.valor_total }}</td>
+                            <td>{{ orcamento.get_status_display }}</td>
+                            <td>{{ orcamento.created_at }}</td>
+                            <td class="d-flex align-items-center justify-content-end">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="true"><i class="fas fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-28px, 30.4px, 0px);" data-popper-reference-hidden="" data-popper-escaped="">
+                                        <ul>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "orcamentos:detail" orcamento.id %}">
+                                                    <i class="far fa-eye me-2"></i>Abrir orçamento
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger" href="{% url "orcamentos:cancel" orcamento.id %}">
+                                                    <i class="far fa-trash-alt me-2"></i>Cancelar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                {% if request.GET.q %}
+                                    Nenhum cliente encontrado.
+                                {% else %}
+                                    Nenhum cliente cadastrado.
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "partials/pagination.html" %}
+        </div>
+    </div>
+
+{% endblock content %}
