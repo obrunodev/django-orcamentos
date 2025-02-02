@@ -12,9 +12,12 @@ class ClienteListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Cliente.objects.filter(
+        clientes =  Cliente.objects.filter(
             empresa=self.request.user.empresas.first()
         )
+        if q := self.request.GET.get('q'):
+            clientes = clientes.filter(nome__icontains=q)
+        return clientes
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):

@@ -4,10 +4,15 @@
 
 {% block content %}
 
-    <a href="{% url "clientes:create" %}" class="btn btn-primary mb-3">Novo cliente</a>
 
     <div class="card">
         <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <form method="get">
+                    <input type="text" name="q" class="form-control" placeholder="Buscar cliente" value="{{ request.GET.q }}">
+                </form>
+                <a href="{% url "clientes:create" %}" class="btn btn-primary mb-3">Novo cliente</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>

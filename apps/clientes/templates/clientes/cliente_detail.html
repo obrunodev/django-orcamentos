@@ -9,12 +9,49 @@
             <h2>{{ cliente.nome }}</h2>
         </div>
         <div class="card-body">
-            <ul>
-                <li><strong>Telefone:</strong> {{ cliente.telefone }}</li>
-                <li><strong>E-mail:</strong> {{ cliente.email|default:"Não fornecido" }}</li>
-                <li><strong>Endereço:</strong> {{ cliente.endereco|default:"Não fornecido" }}</li>
-                <li><strong>Observações:</strong> {{ cliente.observacoes }}</li>
-            </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Telefone:</strong> {{ cliente.telefone }}
+                </div>
+                <div class="col-md-6">
+                    <strong>E-mail:</strong> {{ cliente.email|default:"Não fornecido" }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Endereço:</strong> {{ cliente.endereco|default:"Não fornecido" }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Observações:</strong> {{ cliente.observacoes }}
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Orçamentos</h3>
+
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Ambiente</th>
+                        <th>Valor total</th>
+                        <th>Data do orçamento</th>
+                        <th>Última atualização</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orcamento in cliente.orcamento_set.all %}
+                        <tr>
+                            <td>{{ orcamento.ambiente }}</td>
+                            <td>R$ {{ orcamento.valor_total }}</td>
+                            <td>{{ orcamento.created_at }}</td>
+                            <td>{{ orcamento.updated_at }}</td>
+                            <td></td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="3" class="text-center">Sem orçamentos para este cliente</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div class="card-footer">
             <a href="{% url "clientes:list" %}" class="btn btn-secondary">Voltar</a>
