@@ -1,27 +1,31 @@
 {% extends "layout/base.html" %}
 
 {% block title %}
-    {% if cliente.id %}
-        Editar cliente
-    {% else %}
-        Novo cliente
-    {% endif %}
+    {% if cliente.id %}Editar{% else %}Novo{% endif %}
+    cliente
 {% endblock title %}
 
 {% block content %}
 
-    <h1>Novo cliente</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">
-            {% if cliente.id %}
-                Atualizar
-            {% else %}
-                Cadastrar
-            {% endif %}
-        </button>
-    </form>
+    <div class="card">
+        <div class="card-header">
+            {% if cliente.id %}Editar{% else %}Novo{% endif %}
+            cliente
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-2">
+                    {% if cliente.id %}
+                        Atualizar
+                    {% else %}
+                        Cadastrar
+                    {% endif %}
+                </button>
+                <a href="{% url "clientes:list" %}" class="btn btn-secondary mt-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}

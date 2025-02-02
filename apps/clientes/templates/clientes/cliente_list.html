@@ -4,25 +4,64 @@
 
 {% block content %}
 
-    <h1>Clientes</h1>
+    <a href="{% url "clientes:create" %}" class="btn btn-primary mb-3">Novo cliente</a>
 
-    <a href="{% url "clientes:create" %}">Novo cliente</a>
-
-    <ul>
-        {% for cliente in clientes %}
-            <li>
-                {{ cliente.nome }}
-                <a href="{% url "clientes:update" cliente.id %}">Editar</a>
-                <a href="{% url "clientes:detail" cliente.id %}">Visualizar</a>
-                <a href="{% url "clientes:delete" cliente.id %}">Excluir</a>
-            </li>
-        {% empty %}
-            {% if request.GET.q %}
-                <li>Nenhum cliente encontrado.</li>
-            {% else %}
-                <li>Nenhum cliente cadastrado.</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                        <tr>
+                            <td>{{ cliente.nome }}</td>
+                            <td>{{ cliente.telefone }}</td>
+                            <td>{{ cliente.email|default:"Não fornecido" }}</td>
+                            <td class="d-flex align-items-center justify-content-end">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="true"><i class="fas fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-28px, 30.4px, 0px);" data-popper-reference-hidden="" data-popper-escaped="">
+                                        <ul>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "clientes:detail" cliente.id %}">
+                                                    <i class="far fa-eye me-2"></i>Visualizar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "clientes:update" cliente.id %}">
+                                                    <i class="far fa-edit me-2"></i>Editar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger" href="{% url "clientes:delete" cliente.id %}">
+                                                    <i class="far fa-trash-alt me-2"></i>Excluir
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                {% if request.GET.q %}
+                                    Nenhum cliente encontrado.
+                                {% else %}
+                                    Nenhum cliente cadastrado.
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 {% endblock content %}
