@@ -51,7 +51,7 @@ class OrcamentoListView(ListView):
         clientes = Cliente.objects.filter(empresa=empresa)
         orcamentos = Orcamento.objects.filter(cliente__in=clientes).exclude(
             status=Orcamento.StatusChoices.CANCELADO,
-        )
+        ).order_by('-created_at')
         if q := self.request.GET.get('q'):
             orcamentos = orcamentos.filter(
                 Q(cliente__nome__icontains=q) |
