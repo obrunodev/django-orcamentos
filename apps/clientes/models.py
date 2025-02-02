@@ -10,6 +10,7 @@ class Cliente(BaseModel):
     possui_whatsapp = models.BooleanField('Possui Whatsapp?', default=True)
     email = models.EmailField('E-mail', blank=True, null=True)
     endereco = models.CharField('Endereço', max_length=255, blank=True, null=True)
+    observacoes = models.TextField('Observações', blank=True, default='')
 
     class Meta:
         ordering = ['nome']

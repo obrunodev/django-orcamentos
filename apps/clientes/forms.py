@@ -6,4 +6,4 @@ class ClienteForm(BaseModelForm):
 
     class Meta:
         model = Cliente
-        fields = ['nome', 'telefone', 'possui_whatsapp', 'email', 'endereco']
+        fields = ['nome', 'telefone', 'possui_whatsapp', 'email', 'endereco', 'observacoes']
