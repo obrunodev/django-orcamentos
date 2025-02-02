@@ -22,9 +22,6 @@
         {% include "partials/sidebar.html" %}
         <div class="page-wrapper">
             <div class="content container-fluid">
-                {% if section %}
-                    {% include "partials/page_header.html" %}
-                {% endif %}
                 <div class="row">
                     <div class="col-sm-12">
                         {% block content %}{% endblock content %}

@@ -8,11 +8,7 @@ from django.urls import reverse_lazy
 class ClienteListView(LoginRequiredMixin, ListView):
     model = Cliente
     context_object_name = 'clientes'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['section'] = 'Clientes'
-        return context
+    paginate_by = 10
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
