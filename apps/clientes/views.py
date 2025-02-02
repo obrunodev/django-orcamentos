@@ -11,6 +11,11 @@ class ClienteListView(LoginRequiredMixin, ListView):
     context_object_name = 'clientes'
     paginate_by = 10
 
+    def get_queryset(self):
+        return Cliente.objects.filter(
+            empresa=self.request.user.empresas.first()
+        )
+
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Cliente
@@ -18,6 +23,7 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('clientes:list')
 
     def form_valid(self, form):
+        form.instance.empresa = self.request.user.empresas.first()
         messages.success(self.request, "Cliente criado com sucesso!")
         return super().form_valid(form)
 
