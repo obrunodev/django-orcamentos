@@ -1,11 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="smlg" data-sidebar-image="none">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %} | DJOrçamentos</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static "img/favicon.png" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "plugins/fontawesome/css/fontawesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "plugins/fontawesome/css/all.min.css" %}">
+    <link rel="stylesheet" href="{% static "plugins/feather/feather.css" %}">
+    <link rel="stylesheet" href="{% static "plugins/datatables/datatables.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <script src="{% static "js/layout.js" %}"></script>
 </head>
 <body>
-    {% block content %}{% endblock content %}
+    <div class="main-wrapper">
+        {% include "partials/header.html" %}
+        {% include "partials/sidebar.html" %}
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                {% if section %}
+                    {% include "partials/page_header.html" %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% block content %}{% endblock content %}
+                    </div>			
+                </div>
+            </div>			
+        </div>
+    </div>
+
+    <script src="{% static "js/jquery-3.7.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "js/feather.min.js" %}"></script>
+    <script src="{% static "plugins/slimscroll/jquery.slimscroll.min.js" %}"></script>
+    <script src="{% static "js/greedynav.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
 </body>
 </html>
